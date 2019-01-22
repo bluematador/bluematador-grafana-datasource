@@ -3,7 +3,7 @@ import './css/main.css!';
 
 export class BlueMatadorDatasource {
   constructor(instanceSettings, $q, backendSrv, templateSrv) {
-    this.url = 'http://localhost:9000/'; // 'https://app.bluematador.com/';
+    this.url = 'https://app.bluematador.com/';
     this.accountId = instanceSettings.jsonData.accountId;
     this.apikey = instanceSettings.jsonData.apikey;
 
