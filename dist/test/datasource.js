@@ -21,7 +21,7 @@ var BlueMatadorDatasource = exports.BlueMatadorDatasource = function () {
   function BlueMatadorDatasource(instanceSettings, $q, backendSrv, templateSrv) {
     _classCallCheck(this, BlueMatadorDatasource);
 
-    this.url = 'http://localhost:9000/'; // 'https://app.bluematador.com/';
+    this.url = 'https://app.bluematador.com/';
     this.accountId = instanceSettings.jsonData.accountId;
     this.apikey = instanceSettings.jsonData.apikey;
 
