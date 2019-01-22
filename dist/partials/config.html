@@ -1,0 +1,22 @@
+<h3 class="page-heading">Blue Matador Configuration</h3>
+<p>To get the configuration values in this form, visit <a href="https://app.bluematador.com/setup/notifications/grafana" target="_blank">https://app.bluematador.com/setup/notifications/grafana</a>.
+<div class="gf-form-group">
+  <div class="gf-form" style="margin-bottom:5px;">
+    <label class="gf-form-label width-14 pointer" for="bm-account">
+      Account ID
+      <info-popover position="top center" mode="right-normal">
+        <p>Enter the ID of your Blue Matador account.</p>
+      </info-popover>
+    </label>
+    <input class="gf-form-input width-30" id="bm-account" type="text" ng-model='ctrl.current.jsonData.accountId' placeholder=""></input>
+  </div>
+  <div class="gf-form">
+    <label class="gf-form-label width-14 pointer" for="bm-api">
+      API Key
+      <info-popover position="top center" mode="right-normal">
+        <p>Enter an API Key to access the data</p>
+      </info-popover>
+    </label>
+    <input class="gf-form-input width-30" id="bm-api" type="text" ng-model='ctrl.current.jsonData.apikey' placeholder=""></input>
+  </div>
+</div>
