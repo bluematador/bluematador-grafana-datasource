@@ -3,9 +3,9 @@ import './css/main.css!';
 
 export class BlueMatadorDatasource {
   constructor(instanceSettings, $q, backendSrv, templateSrv) {
-    this.url = 'https://app.bluematador.com/';
-    this.accountId = instanceSettings.jsonData.accountId;
-    this.apikey = instanceSettings.jsonData.apikey;
+    this.url = instanceSettings.jsonData.url.trim() || 'https://app.bluematador.com/';
+    this.accountId = instanceSettings.jsonData.accountId.trim();
+    this.apikey = instanceSettings.jsonData.apikey.trim();
 
     this.q = $q;
     this.backendSrv = backendSrv;
@@ -21,6 +21,14 @@ export class BlueMatadorDatasource {
   metricFindQuery(query) {}
 
   testDatasource() {
+    if (!this.accountId || !this.apikey) {
+      return Promise.resolve({
+        status: 'error',
+        message: 'Finish configuring the datasource before testing',
+        title: 'Error',
+      });
+    }
+
     return this.doRequest({
       url: `${this.url}ma/accounts/${this.accountId}/grafana/test`,
       method: 'GET',
@@ -76,29 +84,8 @@ export class BlueMatadorDatasource {
   doRequest(options) {
     options.withCredentials = this.withCredentials;
     options.headers = this.headers;
-    if (this.authToken) {
-      options.headers['Rocks-Auth'] = this.authToken;
-      return this.backendSrv.datasourceRequest(options).catch(result => {
-        if (result.status == 401 || result.status == 403) {
-          this.authToken = null;
-          return this.doRequest(options);
-        }
-      });
-    } else {
-      return this.backendSrv.datasourceRequest({
-        url: `${this.url}zi/auth/api`,
-        data: {
-          accountId: this.accountId,
-          apiKey: this.apikey,
-        },
-        method: 'POST',
-      }).then(result => {
-        if (result.status == 200) {
-          this.authToken = result.data;
-          return this.doRequest(options);
-        }
-      });
-    }
+    options.headers['Authorization'] = this.apikey;
+    return this.backendSrv.datasourceRequest(options);
   }
 
 }
