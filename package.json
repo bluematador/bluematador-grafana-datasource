@@ -1,7 +1,7 @@
 {
   "name": "bluematador-grafana-datasource",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Grafana datasource to pull in event annotations from Blue Matador",
   "main": "index.js",
   "scripts": {
